@@ -75,7 +75,7 @@ func editdata(A *tabKonten, n int){
 func bacaDaftarKonten(A *tabKonten, n *int) {
 	var i, pilihan  int
 	
-	fmt.Println("Mau buat berapa konten? (max = 10)")
+	fmt.Println("Mau buat berapa konten? (HANYA MASUKAN ANGKA 1-10 SAJA)")
 	fmt.Scan(n)
 	
 	if *n > 10 {
@@ -83,15 +83,22 @@ func bacaDaftarKonten(A *tabKonten, n *int) {
 		*n = 0 
 		return
 	}
+	if *n < 1 || *n > 10 {
+		fmt.Println("ERROR: HANYA MENERIMA ANGKA 1–10.")
+		*n = 0
+		return
+	}
+	
 	for i = 0; i < *n; i++ {
 		fmt.Println("ID konten")
 		inputID(A, i)
 		
-		fmt.Println("\nJudul konten (jangan menggunakan spasi)", i+1, ":")
+		fmt.Println("\nJudul konten (JANGAN MENGGUNAKAN SPASI)", i+1, ":")
 		fmt.Scan(&A[i].daftarKonten)
 		fmt.Print("Kategori: ")
 		fmt.Scan(&A[i].kategori)
-		A[i].jmlInteraksi = 0
+		fmt.Print("Masukan jumlah interaksi: ")
+		fmt.Scan(&A[i].jmlInteraksi)
 	}
 	
 	for {
@@ -117,7 +124,7 @@ func bacaDaftarKonten(A *tabKonten, n *int) {
 func jadwalkanKonten(A *tabKonten, n int) {
 	var idx int
 	
-	fmt.Print("\nMasukkan indeks konten yang ingin dijadwalkan (0 hingga ", n-1, "): ")
+	fmt.Print("\nMasukan indeks konten (0 hingga ", n-1, "): ")
 	fmt.Scan(&idx)
 
 	if idx >= 0 && idx < n {
@@ -215,7 +222,7 @@ func binarySearch(A *tabKonten, n int){
 func tampilkanKonten(A *tabKonten, n int) {
     var i int
     
-    fmt.Println("Daftar Konten:")
+    fmt.Println("\nDaftar Konten:")
 	
     for i = 0; i < n; i++ {
         fmt.Println(i+1, ".", A[i].daftarKonten)
